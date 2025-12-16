@@ -12,11 +12,12 @@ function decode(message, shift) {
   // const alpha = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
   // console.log(alpha)
   let counter = 0;
+  let result = '';
   for (let i = 0; i < message.length; i++) {
     // console.log(i)
     const regex = /[a-zA-Z]/;
     if (regex.test(message[i])) {
-      console.log(message[i].charCodeAt(0));
+      console.log('Original: ', message[i].charCodeAt(0));
       counter = message[i].charCodeAt(0);
       // check for wrap
       // 97 -122
@@ -35,13 +36,19 @@ function decode(message, shift) {
           counter = counter - 26;
         }
       }
+      console.log('Shifted: ', counter);
+      result += String.fromCharCode(counter);
       // counter = counter - shift;
 
       //} else {
       // counter = counter + shift;
       //}
+    } else {
+      result += message[i];
     }
   }
+  console.log(result);
+  return result;
   // return message;
   // shift each letter according to shift
 }
