@@ -18,8 +18,25 @@ function decode(message, shift) {
     if (regex.test(message[i])) {
       console.log(message[i].charCodeAt(0));
       counter = message[i].charCodeAt(0);
-      //if (shift > 0) {
-      counter = counter - shift;
+      // check for wrap
+      // 97 -122
+      if (counter >= 97 && counter <= 122) {
+        counter = counter - shift;
+        if (counter < 97) {
+          counter = counter + 26;
+        } else if (counter > 122) {
+          counter = counter - 26;
+        }
+      } else if (counter >= 65 && counter <= 90) {
+        counter = counter - shift;
+        if (counter < 65) {
+          counter = counter + 26;
+        } else if (counter > 90) {
+          counter = counter - 26;
+        }
+      }
+      // counter = counter - shift;
+
       //} else {
       // counter = counter + shift;
       //}
