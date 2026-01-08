@@ -27,16 +27,23 @@ function buyItems(funds, items) {
 
   // build a converter helper
   function converter(value, curr) {
-    if (curr !== 'USD') {
-      let convRate = convTable[curr].value;
-      // convert value
-      console.log(convRate);
-      return value * convRate;
-    }
-    return value;
+    return (value * convTable[curr]).toFixed(2);
   }
 
-  converter(100, 'USD');
+  // convert funds
+  let convertedFunds = converter(funds[0], funds[1]);
+  console.log(convertedFunds);
+
+  // convert shopping list
+  const convertedList = [];
+
+  for (let i = 0; i < items.length; i++) {
+    convertedList.push(converter(items[i][0], items[i][1]));
+  }
+
+  console.log(convertedList);
+
+  // console.log(converter(100, "JPY"))
 
   return funds;
 }
