@@ -27,7 +27,7 @@ function buyItems(funds, items) {
 
   // build a converter helper
   function converter(value, curr) {
-    return (value * convTable[curr]).toFixed(2);
+    return Number(value) * convTable[curr];
   }
 
   // convert funds
@@ -42,6 +42,29 @@ function buyItems(funds, items) {
   }
 
   console.log(convertedList);
+
+  // check funds
+  let balance = Number(convertedFunds);
+  let count = 0;
+
+  for (let i = 0; i < convertedList.length; i++) {
+    let itemPrice = Number(convertedList[i]);
+
+    if (balance >= itemPrice) {
+      balance -= itemPrice;
+      count++;
+    } else {
+      // If we can't afford this one, we stop shopping!
+      break;
+    }
+  }
+
+  // return statement
+  if (count === items.length) {
+    return 'Buy them all!';
+  } else {
+    return `Buy the first ${count} items.`;
+  }
 
   // console.log(converter(100, "JPY"))
 
